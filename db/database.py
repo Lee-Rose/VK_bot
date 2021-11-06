@@ -101,12 +101,12 @@ class Connect:
             return self.session.query(*model_fields).join(*join).filter(*expression)
         return self.session.query(*model_fields).filter(*expression)
 
-    def update_data(self, model_fields, expression, _fields):
+    def update_data(self, model_fields, expression, fields):
         if not isinstance(model_fields, tuple):
             model_fields = (model_fields,)
         if not isinstance(expression, tuple):
             expression = (expression,)
-        self.session.query(*model_fields).filter(*expression).update(_fields)
+        self.session.query(*model_fields).filter(*expression).update(*fields)
         self.session.commit()
 
     def delete_from_db(self, model_fields, expression=None, join=None):
